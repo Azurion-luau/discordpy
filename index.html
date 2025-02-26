@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord.py Documentation</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #00ff00;
+        }
+        pre {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .copy-button {
+            background-color: #00ff00;
+            color: black;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+    </style>
+    <script>
+        function copyToClipboard(id) {
+            const codeBlock = document.getElementById(id);
+            navigator.clipboard.writeText(codeBlock.innerText);
+        }
+    </script>
+</head>
+<body>
+    <h1>Discord.py Documentation</h1>
+    <p>Discord.py is a library to create bots for Discord using Python.</p>
+    
+    <h2>Installation</h2>
+    <pre id="install">pip install -U discord.py <button class="copy-button" onclick="copyToClipboard('install')">Copy</button></pre>
+    
+    <h2>Basic Bot</h2>
+    <pre id="basic-bot">
+import discord
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix="!")
+
+@bot.event
+async def on_ready():
+    print(f"Logged in as {bot.user}")
+
+bot.run("TOKEN")
+    <button class="copy-button" onclick="copyToClipboard('basic-bot')">Copy</button></pre>
+    
+    <h2>Slash Commands</h2>
+    <pre id="slash-command">
+from discord import app_commands
+
+@bot.tree.command(name="ping")
+async def ping(interaction: discord.Interaction):
+    await interaction.response.send_message("Pong!")
+    <button class="copy-button" onclick="copyToClipboard('slash-command')">Copy</button></pre>
+    
+    <h2>Events</h2>
+    <pre id="events">
+@bot.event
+async def on_member_join(member):
+    print(f"{member} joined the server!")
+
+@bot.event
+async def on_member_remove(member):
+    print(f"{member} left the server!")
+    <button class="copy-button" onclick="copyToClipboard('events')">Copy</button></pre>
+    
+    <h2>Moderation Commands</h2>
+    <pre id="ban-command">
+@bot.command()
+async def ban(ctx, member: discord.Member, reason=None):
+    await member.ban(reason=reason)
+    await ctx.send(f"Banned {member.mention} for {reason}")
+    <button class="copy-button" onclick="copyToClipboard('ban-command')">Copy</button></pre>
+    
+    <h2>Using Modals</h2>
+    <pre id="modal-command">
+class MyModal(discord.ui.Modal, title="Example Modal"):
+    name = discord.ui.TextInput(label="Your name", required=True)
+    feedback = discord.ui.TextInput(label="Your feedback", style=discord.TextStyle.paragraph, required=True)
+
+    async def on_submit(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Thanks {self.name.value} for your feedback!")
+    <button class="copy-button" onclick="copyToClipboard('modal-command')">Copy</button></pre>
+</body>
+</html>
